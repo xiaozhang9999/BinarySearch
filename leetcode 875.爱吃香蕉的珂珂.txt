@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int l=1,r=*max_element(piles.begin(),piles.end());
+        while(l<r){
+            int mid=l+(r-l)/2;
+            if(eatingTime(piles,mid)<=h)
+            r=mid;
+            else
+            l=mid+1;
+        }
+        return l;
+    }
+    //速度为k时吃香蕉所用时间
+    int eatingTime(vector<int>&piles,int k){
+        int eT=0;
+        for(int pile:piles){
+            eT+=pile/k + (pile%k>0 ? 1:0);
+        }
+        return eT;
+    }
+};
